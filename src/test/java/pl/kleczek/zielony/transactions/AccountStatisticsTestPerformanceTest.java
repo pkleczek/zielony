@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static pl.kleczek.zielony.transactions.Fixtures.randomTransactions;
 
 class AccountStatisticsTestPerformanceTest {
-    static final int NUMBER_OF_ACCOUNTS = 100;
-    static final int TRANSACTION_COUNT = 1_000_000;
+    static final int NUMBER_OF_ACCOUNTS = 100_000;
+    static final int TRANSACTION_COUNT = 2_000_000;
 
 
     AccountStatistics accountStatistics = new AccountStatistics();

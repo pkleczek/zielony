@@ -1,13 +1,13 @@
 package pl.kleczek.zielony.transactions;
 
-import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class AccountStatistics {
     public List<AccountSummary> calculateSummary(List<Transaction> transactions) {
-        Map<String, AccountSummary> accounts = new TreeMap<>();
+        Map<String, AccountSummary> accounts = new HashMap<>();
 
         for (Transaction transaction : transactions) {
             accounts.putIfAbsent(transaction.debitAccount(), new AccountSummary(transaction.debitAccount()));
@@ -23,7 +23,10 @@ public class AccountStatistics {
             }
         }
 
-        return new ArrayList<>(accounts.values());
+        return accounts.values()
+            .stream()
+            .sorted(Comparator.comparing(AccountSummary::getAccount))
+            .toList();
     }
 
     private static void handleSingleAccountTransaction(Transaction transaction, AccountSummary debitAccount) {
